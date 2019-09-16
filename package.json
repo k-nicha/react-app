@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "react": "16.9.0",
-    "react-dom": "16.9.0"
+    "react-dom": "16.9.0",
+    "react-router-dom": "^5.0.1",
+    "source-map-loader": "^0.2.4"
   },
   "devDependencies": {
     "@babel/core": "7.6.0",
