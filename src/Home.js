@@ -9,7 +9,8 @@ class Home extends React.Component {
         }
     }
 
-    showOrHide = () => {
+    showOrHide = (event) => {
+        console.log(event.target.id)
         /* menuvanje na state so setState() metoda
         otkako state-ot kje se smeni,
         komponentata si go vika svojot render metod odnovo
