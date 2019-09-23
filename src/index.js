@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import Wrapper from './Wrapper'
 import Heading from './Heading'
+import Home from './Home'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 const app = document.getElementById('app')
@@ -26,10 +27,6 @@ const Menu = () => {
             </li>
         </ul>
     )
-}
-
-const Home = () => {
-    return (<h1>Welcome to my home page!</h1>)
 }
 
 const About = () => {
