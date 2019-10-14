@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
+import { Provider } from 'react-redux'
+import store from './redux/store.js'
 import Wrapper from './Wrapper'
 import UsersList from './UsersList'
 import Home from './Home'
@@ -72,4 +74,7 @@ const Routes = () => {
     )
 } */
 
-ReactDOM.render(<Routes />, app)
+ReactDOM.render(
+    <Provider store={store}>
+        <Routes />
+    </Provider>, app)
