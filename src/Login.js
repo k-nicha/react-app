@@ -1,11 +1,15 @@
 import React from 'react'
+import store from './redux/store'
+import Alert from './Alert.js'
+import { updateUser, deleteUser } from './redux/actions/updateUser'
 
 class Login extends React.Component {
     constructor() {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            address: ''
         }
     }
 
@@ -18,7 +22,15 @@ class Login extends React.Component {
     }
 
     submit = () => {
-        alert(this.state.username + ' ' + this.state.password)
+        store.dispatch(updateUser(
+            this.state.username,
+            this.state.password,
+            this.state.address
+        ))
+    }
+
+    delete = () => {
+        store.dispatch(deleteUser())
     }
 
     saveInput = (event) => {
@@ -27,6 +39,7 @@ class Login extends React.Component {
 
     render () {
         return <React.Fragment>
+            <Alert />
             <input id='username'
                 placeholder='Username'
                 onChange={this.checkInput}
@@ -35,7 +48,14 @@ class Login extends React.Component {
                 placeholder='Password' 
                 onChange={this.saveInput}
             />
+            <input id='address'
+                placeholder='Address' 
+                onChange={this.saveInput}
+            />
             <button id='submit' onClick={this.submit}>Log In!</button>
+            <button id='delete' onClick={this.delete}>
+                Delete user
+            </button>
         </React.Fragment>
     }
 }
