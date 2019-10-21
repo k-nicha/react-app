@@ -6,6 +6,7 @@ import Wrapper from './Wrapper'
 import UsersList from './UsersList'
 import Home from './Home'
 import Login from './Login'
+import Table from './Table'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 const app = document.getElementById('app')
@@ -20,7 +21,7 @@ const Menu = () => {
                 <Link to='/about'>About us</Link>
             </li>
             <li>
-                <Link to='/contact'>Contact us</Link>
+                <Link to='/users_list'>Users List</Link>
             </li>
             <li>
                 <Link to='/login'>Log in</Link>
@@ -47,7 +48,7 @@ const Routes = () => {
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/about' component={About} />
-                <Route exact path='/contact' component={Contact} />
+                <Route exact path='/users_list' component={Table} />
                 <Route exact path='/login' component={Login} />
                 <Route
                     exact
