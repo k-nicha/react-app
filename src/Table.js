@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { writeUsersToStore } from './redux/actions/writeUsersToStore'
+import {
+    writeUsersToStore,
+    addUserToStore } from './redux/actions/writeUsersToStore'
 import { connect } from 'react-redux'
 import './style.css'
 
@@ -28,11 +30,12 @@ class Table extends React.Component {
             <div className='my-modal'>
                 <div className='form-container'>
                     <div className='text-container'>Add new user</div>
-                    <input type='text' className='form-control' placeholder='name' />
-                    <input type='text' className='form-control' placeholder='username' />
-                    <input type='text' className='form-control' placeholder='email' />
-                    <input type='text' className='form-control' placeholder='address' />
-                    <button id='save' className='btn btn-success'>Save</button>
+                    <input id='name' type='text' className='form-control' placeholder='name' />
+                    <input id='username' type='text' className='form-control' placeholder='username' />
+                    <input id='email' type='text' className='form-control' placeholder='email' />
+                    <input id='address' type='text' className='form-control' placeholder='address' />
+                    <button id='save' className='btn btn-success'
+                    onClick={this.saveUser}>Save</button>
                     <button id='close' className='btn btn-secondary'
                     onClick={() => this.setState({ showModal: null })}>Close</button>
                 </div>
@@ -40,22 +43,35 @@ class Table extends React.Component {
         })
     }
 
-    editUser = (user) => {
+    editUser = (user) => { 
         this.setState({ showModal:
             <div className='my-modal'>
                 <div className='form-container'>
                     <div className='text-container'>Edit user</div>
-                    <input type='text' className='form-control' defaultValue={user.name} />
-                    <input type='text' className='form-control' defaultValue={user.username} />
-                    <input type='text' className='form-control' defaultValue={user.email} />
-                    <input type='text' className='form-control' defaultValue={
-                        user.address.city + ' ' + user.address.street} />
-                    <button id='save' className='btn btn-success'>Save</button>
+                    <input id='name' type='text' className='form-control' defaultValue={user.name} />
+                    <input id='username' type='text' className='form-control' defaultValue={user.username} />
+                    <input id='email' type='text' className='form-control' defaultValue={user.email} />
+                    <input id='address' type='text' className='form-control' defaultValue={
+                        user.address.city + ' ' + user.address.street + ' ' + user.address.suite} />
+                    <button id='save' className='btn btn-success'
+                    onClick={() => this.saveUser(user.id)}>Save</button>
                     <button id='close' className='btn btn-secondary'
                     onClick={() => this.setState({ showModal: null })}>Close</button>
                 </div>           
             </div>
         })
+    }
+
+    saveUser = (id) => {
+        const newUser = {
+            id: id,
+            name: document.getElementById('name').value,
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            address: document.getElementById('address').value
+        }
+
+        this.props.addUserToStore(newUser)
     }
 
     render () {
@@ -109,7 +125,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        writeUsersToStore: (data) => dispatch(writeUsersToStore(data))
+        writeUsersToStore: (data) => dispatch(writeUsersToStore(data)),
+        addUserToStore: (data) => dispatch(addUserToStore(data))
     }
 }
 

@@ -5,10 +5,10 @@ export function writeUsersToStore (data) {
     }
 }
 
-export function addUserToStore (data) {
+export function addUserToStore (user) {
     return {
         type: 'SAVE_USER',
-        payload: data
+        payload: user
     }
 }
 
