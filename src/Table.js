@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { writeUsersToStore } from './redux/actions/writeUsersToStore'
 import { connect } from 'react-redux'
+import './style.css'
 
 class Table extends React.Component {
     constructor () {
@@ -24,22 +25,23 @@ class Table extends React.Component {
 
     addUser = () => {
         this.setState({ showModal:
-            <div>
-                <input placeholder='name' />
-                <input placeholder='username' />
-                <input placeholder='email' />
-                <input placeholder='address' />
+            <div className='my-modal'>
+                <input type='text' className='form-control' placeholder='name' />
+                <input type='text' className='form-control' placeholder='username' />
+                <input type='text' className='form-control' placeholder='email' />
+                <input type='text' className='form-control' placeholder='address' />
             </div>
         })
     }
 
     editUser = (user) => {
         this.setState({ showModal:
-            <div>
-                <input defaultValue={user.name} />
-                <input defaultValue={user.username} />
-                <input defaultValue={user.email} />
-                <input defaultValue={user.address} />
+            <div className='my-modal'>
+                <input type='text' className='form-control' defaultValue={user.name} />
+                <input type='text' className='form-control' defaultValue={user.username} />
+                <input type='text' className='form-control' defaultValue={user.email} />
+                <input type='text' className='form-control' defaultValue={
+                    user.address.city + ' ' + user.address.street} />
             </div>
         })
     }
@@ -60,7 +62,7 @@ class Table extends React.Component {
                         {`${user.address.street} ${user.address.suite}`}
                     </td>
                     <td>
-                        <button id='edit' onClick={() => this.editUser(user)}>
+                        <button id='edit' className='btn btn-light' onClick={() => this.editUser(user)}>
                             Edit
                         </button>
                     </td>
@@ -68,14 +70,16 @@ class Table extends React.Component {
             })
         }
         return (
-            <table>
+            <table className='table table-dark'>
+                {this.state.showModal}
                 <thead>
-                    <td>
-                        <button id='add' onClick={this.addUser}>
-                            Add new user
-                        </button>
-                    </td>
-                    
+                    <tr>
+                        <th>
+                            <button id='add' className='btn btn-success' onClick={this.addUser}>
+                                Add new user
+                            </button>
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
                     {usersList}
