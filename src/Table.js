@@ -26,10 +26,16 @@ class Table extends React.Component {
     addUser = () => {
         this.setState({ showModal:
             <div className='my-modal'>
-                <input type='text' className='form-control' placeholder='name' />
-                <input type='text' className='form-control' placeholder='username' />
-                <input type='text' className='form-control' placeholder='email' />
-                <input type='text' className='form-control' placeholder='address' />
+                <div className='form-container'>
+                    <div className='text-container'>Add new user</div>
+                    <input type='text' className='form-control' placeholder='name' />
+                    <input type='text' className='form-control' placeholder='username' />
+                    <input type='text' className='form-control' placeholder='email' />
+                    <input type='text' className='form-control' placeholder='address' />
+                    <button id='save' className='btn btn-success'>Save</button>
+                    <button id='close' className='btn btn-secondary'
+                    onClick={() => this.setState({ showModal: null })}>Close</button>
+                </div>
             </div>
         })
     }
@@ -37,11 +43,17 @@ class Table extends React.Component {
     editUser = (user) => {
         this.setState({ showModal:
             <div className='my-modal'>
-                <input type='text' className='form-control' defaultValue={user.name} />
-                <input type='text' className='form-control' defaultValue={user.username} />
-                <input type='text' className='form-control' defaultValue={user.email} />
-                <input type='text' className='form-control' defaultValue={
-                    user.address.city + ' ' + user.address.street} />
+                <div className='form-container'>
+                    <div className='text-container'>Edit user</div>
+                    <input type='text' className='form-control' defaultValue={user.name} />
+                    <input type='text' className='form-control' defaultValue={user.username} />
+                    <input type='text' className='form-control' defaultValue={user.email} />
+                    <input type='text' className='form-control' defaultValue={
+                        user.address.city + ' ' + user.address.street} />
+                    <button id='save' className='btn btn-success'>Save</button>
+                    <button id='close' className='btn btn-secondary'
+                    onClick={() => this.setState({ showModal: null })}>Close</button>
+                </div>           
             </div>
         })
     }

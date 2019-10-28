@@ -9,4 +9,29 @@
     top: 0;
     left: 0;
     background-color: rgba(0,0,0, 0.5);
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5rem;
+}
+
+.form-container {
+    background: white;
+    border: 1px solid grey;
+    border-radius: 0.25rem;
+    padding: 2rem;
+}
+
+.form-container input {
+    margin-bottom: 0.25rem;
+}
+
+.form-container button {
+    margin-right: 0.25rem;
+}
+
+.text-container {
+    color: grey;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
 }
