@@ -2,7 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import {
     writeUsersToStore,
-    addUserToStore } from './redux/actions/writeUsersToStore'
+    addUserToStore,
+    removeUserFromStore } from './redux/actions/writeUsersToStore'
 import { connect } from 'react-redux'
 import './style.css'
 
@@ -35,7 +36,7 @@ class Table extends React.Component {
                     <input id='email' type='text' className='form-control' placeholder='email' />
                     <input id='address' type='text' className='form-control' placeholder='address' />
                     <button id='save' className='btn btn-success'
-                    onClick={this.saveUser}>Save</button>
+                    onClick={() => this.saveUser()}>Save</button>
                     <button id='close' className='btn btn-secondary'
                     onClick={() => this.setState({ showModal: null })}>Close</button>
                 </div>
@@ -72,6 +73,12 @@ class Table extends React.Component {
         }
 
         this.props.addUserToStore(newUser)
+        // avtomatski go zatvora modalot on save
+        this.setState({ showModal: null })
+    }
+
+    deleteUser = (user) => {
+        this.props.removeUserFromStore(user)
     }
 
     render () {
@@ -90,8 +97,13 @@ class Table extends React.Component {
                         {`${user.address.street} ${user.address.suite}`}
                     </td>
                     <td>
-                        <button id='edit' className='btn btn-light' onClick={() => this.editUser(user)}>
+                        <button id='edit' className='btn btn-light'
+                            onClick={() => this.editUser(user)}>
                             Edit
+                        </button>
+                        <button id='delete' className='btn btn-danger'
+                            onClick={() => this.deleteUser(user)}>
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -126,7 +138,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
     return {
         writeUsersToStore: (data) => dispatch(writeUsersToStore(data)),
-        addUserToStore: (data) => dispatch(addUserToStore(data))
+        addUserToStore: (data) => dispatch(addUserToStore(data)),
+        removeUserFromStore: (data) => dispatch(removeUserFromStore(data))
     }
 }
 
